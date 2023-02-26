@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PySharpShopApplication.Models
 {
-    public class Product
+    public class Product : IDatabaseModel
     {
         public virtual long? Id { get; protected internal set; }
         public virtual string Name { get; protected internal set; }
@@ -17,36 +17,6 @@ namespace PySharpShopApplication.Models
         public virtual long? PriceId { get; protected internal set; }
         public virtual Category Category { get; protected internal set; }
         public virtual Price Price { get; protected internal set; }
-
-        public void ChangePrice(Price price)
-        {
-            if (Name is null)
-            {
-                throw new ArgumentNullException("The product does not exist");
-            }
-            Price = price;
-        }
-
-        public void ChangeProductStatus(ProductStatus productStatus)
-        {
-            if (Name is null)
-            {
-                throw new ArgumentNullException("The product does not exist");
-            }
-            if (Status == productStatus)
-            {
-                throw new Exception("You are trying to change to the current status");
-            }
-            Status = productStatus;
-        }
-
-        public void ChangeProductName(string name)
-        {
-            if (Name is null)
-            {
-                throw new ArgumentNullException("This product does not exist");
-            }
-            Name = name;
-        }
+        public virtual ShoppingCartItem ShoppingCartItem { get; protected internal set; }
     }
 }
